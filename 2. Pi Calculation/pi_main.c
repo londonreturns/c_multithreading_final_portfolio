@@ -16,7 +16,7 @@ pthread_mutex_t L;
 double pi = 0;
 
 void * calculate(void *ran){
-	
+	pthread_mutex_lock(&L);
 	range* r = ran;
 	
 	double tempSum = 0;
@@ -25,7 +25,7 @@ void * calculate(void *ran){
 	for (i = r->start; i <= r->end; i++){
 		tempSum += (pow(-1, i) / (2 * i + 1));
 	}
-	pthread_mutex_lock(&L);
+	
 	pi += tempSum;	
 	pthread_mutex_unlock(&L);
 }
